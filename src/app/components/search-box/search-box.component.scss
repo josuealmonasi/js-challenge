@@ -1,0 +1,16 @@
+.search-box {
+  &.container {
+    // background: red;
+    display: grid;
+    grid-template-columns: 1fr auto;
+  }
+
+  .search-box {
+    width: calc(100% - 4rem);
+    margin: 2rem;
+
+    .search-input {
+      width: 100%;
+    }
+  }
+}

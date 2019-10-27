@@ -1,1 +1,8 @@
-<p>search-box works!</p>
+<mat-card class="search-box container">
+  <form class="search-box">
+    <mat-form-field class="search-input">
+      <input matInput placeholder="Enter a valid ASIN" value="">
+    </mat-form-field>
+  </form>
+  <button mat-button (click)="search()">Search</button>
+</mat-card>
