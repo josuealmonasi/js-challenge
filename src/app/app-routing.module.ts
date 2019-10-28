@@ -3,10 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { SearchProductsComponent } from './components/search-products/search-products.component';
 
 const routes: Routes = [
-	{ path: 'search-products', component: SearchProductsComponent },
+	{ path: '', component: SearchProductsComponent },
 	{
-		path: '',
-		redirectTo: '/search-products',
+		path: '**',
+		redirectTo: '/',
 		pathMatch: 'full',
 	},
 ];
