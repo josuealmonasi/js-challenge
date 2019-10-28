@@ -36,6 +36,7 @@ export class SearchBoxComponent implements OnInit {
 				return xmlhttp;
 			}
 		};
+		if (this.errorMsg.length !== 0) return;
 		xmlhttp.open(
 			'GET',
 			`https://cors-anywhere.herokuapp.com/https://www.amazon.com/dp/${this
