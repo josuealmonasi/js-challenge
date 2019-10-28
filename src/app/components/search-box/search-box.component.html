@@ -4,7 +4,6 @@
       <input matInput placeholder="Enter a valid ASIN" [(ngModel)]="asin"
         name="asin">
     </mat-form-field>
-    <mat-error *ngIf="errorMsg.length !== 0">{{errorMsg}}</mat-error>
   </form>
   <button mat-raised-button color="primary" (click)="search()">Search</button>
 </mat-card>

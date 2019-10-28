@@ -1,5 +1,6 @@
 # JsChallenge
-This project is available in [This URL](https://5db73f6d85306738112dfbbe--frosty-meitner-b423de.netlify.com)
+This project is available in [This URL](https://jungle-scout-challenge.netlify.com)
+                                        
 
 Install all dependencies by running `yarn install` you need to have Yarn previously installed
 
