@@ -9,6 +9,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 export class SearchBoxComponent implements OnInit {
 	public res;
 	public asin: string;
+	public errorMsg = '';
 
 	constructor(public db: AngularFireDatabase) {}
 
@@ -26,8 +27,12 @@ export class SearchBoxComponent implements OnInit {
 		let xmlhttp = new XMLHttpRequest();
 		let item = { asin: this.asin, dimensions: '', rank: '', type: '' };
 		xmlhttp.responseType = 'document';
-		xmlhttp.onreadystatechange = function() {
+		xmlhttp.onreadystatechange = () => {
+			if (xmlhttp.status == 404) {
+				this.errorMsg = 'ASIN not found';
+			}
 			if (xmlhttp.readyState === 4 && xmlhttp.status == 200) {
+				this.errorMsg = '';
 				return xmlhttp;
 			}
 		};
