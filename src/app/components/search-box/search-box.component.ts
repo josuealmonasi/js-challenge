@@ -31,7 +31,12 @@ export class SearchBoxComponent implements OnInit {
 				return xmlhttp;
 			}
 		};
-		xmlhttp.open('GET', `https://www.amazon.com/dp/${this.asin}`, true);
+		xmlhttp.open(
+			'GET',
+			`https://cors-anywhere.herokuapp.com/https://www.amazon.com/dp/${this
+				.asin}`,
+			true,
+		);
 		xmlhttp.onload = () => {
 			let type = xmlhttp.responseXML
 				.querySelector('#wayfinding-breadcrumbs_container')['innerText']
