@@ -24,7 +24,7 @@ export class SearchBoxComponent implements OnInit {
 			return;
 		}
 		let xmlhttp = new XMLHttpRequest();
-		let item = { asin: this.asin, dimensions: '', rank: '', type: 'type' };
+		let item = { asin: this.asin, dimensions: '', rank: '', type: '' };
 		xmlhttp.responseType = 'document';
 		xmlhttp.onreadystatechange = function() {
 			if (xmlhttp.readyState === 4 && xmlhttp.status == 200) {
@@ -33,27 +33,33 @@ export class SearchBoxComponent implements OnInit {
 		};
 		xmlhttp.open('GET', `https://www.amazon.com/dp/${this.asin}`, true);
 		xmlhttp.onload = () => {
-			// let type = xmlhttp.responseXML
-			// 	.querySelector('#wayfinding-breadcrumbs_container')['innerText']
-			// 	.splice('›');
-			// console.log(type[0]);
+			let type = xmlhttp.responseXML
+				.querySelector('#wayfinding-breadcrumbs_container')['innerText']
+				.split('›');
+			item.type = type[0].trim();
 			let tables = xmlhttp.responseXML.querySelectorAll('#prodDetails');
 			tables[0].querySelectorAll('tr').forEach(element => {
 				if (element.children[0]['innerText'].includes('Product Dimensions')) {
 					item.dimensions = element.children[1]['innerText'].trim();
 				}
 				if (element.children[0]['innerText'].includes('Rank')) {
-					item.rank = element.children[1]['innerText'].trim();
-					item.type = element.children[1]['innerText'].trim();
+					let rank = element.children[1]['innerText'].split('(');
+					item.rank = rank[0].trim();
 				}
 			});
+			// Logs the ithem just for debugging
+			console.log(item);
 			this.saveData(item);
 		};
+		// Resets ASIN
+		this.asin = '';
 		xmlhttp.send();
 	}
 
 	/**
    * saveData
+   * takes an item ans saves it to DB
+   * @param item 
    */
 	public saveData(item: {}) {
 		this.db.list('products').push(item);

@@ -1,6 +1,6 @@
 <mat-card class="search-box container">
   <div *ngIf="items">
-    <p *ngFor="let item of items | async">
+    <p *ngFor="let item of items | async | reverse">
       <b>
         Product ASIN:
       </b> {{item.asin}} <br>
