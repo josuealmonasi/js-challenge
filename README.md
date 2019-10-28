@@ -1,5 +1,6 @@
 # JsChallenge
 Install all dependencies by running `yarn install` you need to have Yarn previously installed
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.14.
 
 ## Development server
