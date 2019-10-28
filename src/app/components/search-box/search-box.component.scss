@@ -1,8 +1,7 @@
 .search-box {
   &.container {
-    // background: red;
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: repeat(auto-fit, minmax(0, auto));
   }
 
   .search-box {
@@ -12,5 +11,12 @@
     .search-input {
       width: 100%;
     }
+  }
+
+  button {
+    height: 3rem;
+    width: auto;
+    margin: auto 0;
+    padding: 0;
   }
 }
