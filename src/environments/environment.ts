@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+	production: false,
+	firebaseConfig: {
+		apiKey: 'AIzaSyB1NQ4bpRBt8KRPGhnXt99jbECQL3ZlFYE',
+		authDomain: 'jungle-scout.firebaseapp.com',
+		databaseURL: 'https://jungle-scout.firebaseio.com',
+		projectId: 'jungle-scout',
+		storageBucket: 'jungle-scout.appspot.com',
+		messagingSenderId: '873807090562',
+		appId: '1:873807090562:web:483ecc470b81f96889359b',
+	},
 };
 
 /*

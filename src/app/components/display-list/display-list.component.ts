@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./display-list.component.scss'],
 })
 export class DisplayListComponent implements OnInit {
-	constructor() {}
+	public items: Observable<any[]>;
+
+	constructor(public db: AngularFireDatabase) {
+		this.items = db.list('products').valueChanges();
+	}
 
 	ngOnInit() {}
 }

@@ -1,3 +1,4 @@
+import { environment } from './../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -8,6 +9,9 @@ import { DisplayListComponent } from './components/display-list/display-list.com
 import { SearchBoxComponent } from './components/search-box/search-box.component';
 import { SearchProductsComponent } from './components/search-products/search-products.component';
 import { MaterialModule } from './custom-material.module';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
 	declarations: [
@@ -22,6 +26,9 @@ import { MaterialModule } from './custom-material.module';
 		BrowserAnimationsModule,
 		HttpClientModule,
 		MaterialModule,
+		AngularFireModule.initializeApp(environment.firebaseConfig),
+		AngularFireDatabaseModule,
+		FormsModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent],

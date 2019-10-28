@@ -1,16 +1,18 @@
 <mat-card class="search-box container">
-  <mat-list>
-    <mat-list-item>item</mat-list-item>
-    <mat-list-item>item</mat-list-item>
-    <mat-list-item>item</mat-list-item>
-    <mat-list-item>item</mat-list-item>
-    <mat-list-item>item</mat-list-item>
-    <mat-list-item>item</mat-list-item>
-    <mat-list-item>item</mat-list-item>
-    <mat-list-item>item</mat-list-item>
-    <mat-list-item>item</mat-list-item>
-    <mat-list-item>item</mat-list-item>
-    <mat-list-item>item</mat-list-item>
-    <mat-list-item>item</mat-list-item>
-  </mat-list>
+  <div *ngIf="items">
+    <p *ngFor="let item of items | async">
+      <b>
+        Product ASIN:
+      </b> {{item.asin}} <br>
+      <b>
+        Product Dimensions:
+      </b> {{item.dimensions}} <br>
+      <b>
+        Product Rank:
+      </b> {{item.rank}} <br>
+      <b>
+        Product Category:
+      </b> {{item.type}} <br>
+    </p>
+  </div>
 </mat-card>

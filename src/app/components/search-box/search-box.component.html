@@ -1,7 +1,8 @@
 <mat-card class="search-box container">
   <form class="search-box">
     <mat-form-field class="search-input">
-      <input matInput placeholder="Enter a valid ASIN" value="">
+      <input matInput placeholder="Enter a valid ASIN" [(ngModel)]="asin"
+        name="asin">
     </mat-form-field>
   </form>
   <button mat-button (click)="search()">Search</button>

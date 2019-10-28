@@ -1,5 +1,5 @@
-import { FetchUrlService } from './../../services/fetch-url.service';
 import { Component, OnInit } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Component({
 	selector: 'app-search-box',
@@ -8,8 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchBoxComponent implements OnInit {
 	public res;
+	public asin: string;
 
-	constructor(private fetchService: FetchUrlService) {}
+	constructor(public db: AngularFireDatabase) {}
 
 	ngOnInit() {}
 
@@ -17,52 +18,44 @@ export class SearchBoxComponent implements OnInit {
    * search
    */
 	public search(): void {
+		if (!this.asin) {
+			return;
+		} else if (this.asin.length === 0) {
+			return;
+		}
 		let xmlhttp = new XMLHttpRequest();
-		let asin = 'B002QYW8LW';
-		// let asin = 'B01MD19OI2';
+		let item = { asin: this.asin, dimensions: '', rank: '', type: 'type' };
 		xmlhttp.responseType = 'document';
 		xmlhttp.onreadystatechange = function() {
 			if (xmlhttp.readyState === 4 && xmlhttp.status == 200) {
 				return xmlhttp;
 			}
 		};
-		xmlhttp.open('GET', `https://www.amazon.com/dp/${asin}`, true);
+		xmlhttp.open('GET', `https://www.amazon.com/dp/${this.asin}`, true);
 		xmlhttp.onload = () => {
-			console.log(xmlhttp.responseXML);
+			// let type = xmlhttp.responseXML
+			// 	.querySelector('#wayfinding-breadcrumbs_container')['innerText']
+			// 	.splice('›');
+			// console.log(type[0]);
 			let tables = xmlhttp.responseXML.querySelectorAll('#prodDetails');
-			// console.log(
 			tables[0].querySelectorAll('tr').forEach(element => {
 				if (element.children[0]['innerText'].includes('Product Dimensions')) {
-					console.log(
-						element.children[0]['innerText'],
-						element.children[1]['innerText'],
-					);
+					item.dimensions = element.children[1]['innerText'].trim();
+				}
+				if (element.children[0]['innerText'].includes('Rank')) {
+					item.rank = element.children[1]['innerText'].trim();
+					item.type = element.children[1]['innerText'].trim();
 				}
 			});
-			// );
-			// console.log(
-			// 	new DOMParser()
-			// 		.parseFromString(
-			// 			tables[0].querySelectorAll('table')[0].innerHTML,
-			// 			'text/xml',
-			// 		)
-			// 		.querySelectorAll('td'),
-			// );
-			// console.log(
-			// 	new DOMParser()
-			// 		.parseFromString(
-			// 			tables[0].querySelectorAll('table')[1].innerHTML,
-			// 			'text/xml',
-			// 		)
-			// 		.querySelectorAll('td'),
-			// );
-			// console.log(
-			// 	new DOMParser().parseFromString(tables[0].innerHTML, 'text/xml'),
-			// );
-			// console.log(
-			// 	new DOMParser().parseFromString(tables[1].innerHTML, 'text/xml'),
-			// );
+			this.saveData(item);
 		};
 		xmlhttp.send();
+	}
+
+	/**
+   * saveData
+   */
+	public saveData(item: {}) {
+		this.db.list('products').push(item);
 	}
 }
